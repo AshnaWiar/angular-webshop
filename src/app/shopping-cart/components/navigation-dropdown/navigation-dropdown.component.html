@@ -1,0 +1,9 @@
+<button class="nav-icon" dropdownTrigger aria-label="toggle settings menu">
+    <clr-icon shape="shopping-cart" [class]='getIconClass()'></clr-icon>
+    <clr-icon shape="caret down"></clr-icon>
+</button>
+<div class='dropdown-menu' *IfDropdownIsOpen (outSideClick)="onOutSideClick($event)">
+    <a href="..." class="dropdown-item">About</a>
+    <a href="..." class="dropdown-item">Preferences</a>
+    <a href="..." class="dropdown-item">Log out</a>
+</div>

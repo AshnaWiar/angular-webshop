@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "test-headless": "ng test --watch=false --browsers=FirefoxHeadless --codeCoverage=true",
+    "test": "ng test --browsers=ChromeDebugger",
+    "test-headless": "ng test --watch=false --browsers=ChromeDebugger --codeCoverage=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -25,6 +25,7 @@
     "@clr/icons": "^3.0.1",
     "@clr/ui": "^3.0.1",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "karma-spec-reporter": "0.0.32",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
