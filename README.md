@@ -1,4 +1,5 @@
 # IprwcFrontend
+![Node.js CI](https://github.com/AshnaWiar/angular-webshop/workflows/Node.js%20CI/badge.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
