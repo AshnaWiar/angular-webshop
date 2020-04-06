@@ -19,13 +19,13 @@ export class ShoppingCart implements ShoppingCartInterface {
      */
     add(item: ShoppingCartItemInterface): void {
 
-        if (!this.isItemAlreadyAdded(item)) {
-
-
+        if (this.isItemAlreadyAdded(item)) {
             // break the reference from the parameter.
             const cartItem = Object.assign({}, item);
 
             this.shoppingCart.push(cartItem);
+            console.log('added item', this.shoppingCart);
+            
             return;
         }
 
@@ -38,11 +38,11 @@ export class ShoppingCart implements ShoppingCartInterface {
     }
 
     private isItemAlreadyAdded(item: ShoppingCartItemInterface) {
-        return typeof this.getItemFromCart(item) !== "undefined";
+        return typeof this.getItemFromCart(item) !== undefined;
     }
 
     private getItemFromCart(item: ShoppingCartItemInterface) {
-        return this.shoppingCart.find(cartItem => cartItem.id = item.id);
+        return this.shoppingCart.find(cartItem => cartItem.id == item.id);
     }
 
     /**
