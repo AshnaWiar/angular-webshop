@@ -1,0 +1,83 @@
+.page-content {
+    height: 100vh;
+    max-width: 100%;
+}
+
+/* style dynamic inserted elements like input or select */
+::ng-deep form .clr-control-container ,
+::ng-deep form .clr-control-container .clr-input-wrapper input {
+    width: 100%;
+}
+
+::ng-deep form .clr-control-container ,
+::ng-deep form .clr-control-container .clr-select-wrapper,
+::ng-deep form .clr-control-container .clr-select-wrapper select{
+    width: 100%;
+}
+
+.flex-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-inline-end {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.page-section {
+    margin: 2rem 0;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    margin: 0;
+}
+.btn-link {
+    padding: 0;
+}
+.cart-item-wrapper {
+    max-height: 25em;
+    overflow-y: auto;
+    padding-right: 20px;
+}
+.cart-item {
+    display: grid;
+    grid-template-columns: 75px 1fr auto;
+    grid-gap: 0.4em;
+    padding-bottom: 10px;
+    margin-top: 0.5em;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.cart-item figure {
+    margin: 0;
+}
+
+.cart-item .item-info h1,
+.cart-item .item-info p {
+    line-height: unset;
+    margin: unset;
+}
+.cart-item .item-info h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+
+.cart-total p {
+    font-weight: bold;
+    position: relative;
+    display: block;
+}
+
+.cart-total p > span.pos-right {
+    position: absolute;
+    right: 0;
+}

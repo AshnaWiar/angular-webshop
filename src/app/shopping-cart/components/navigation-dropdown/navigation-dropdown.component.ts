@@ -1,7 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { DropdownTriggerService } from './dropdown-trigger.service';
 import { ShoppingCartService } from '@app/shopping-cart/shopping-cart.service';
 import { ShoppingCartInterface } from '@app/shopping-cart/models/shopping-cart-interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'shopping-cart-navigation-dropdown',
@@ -15,49 +16,70 @@ import { ShoppingCartInterface } from '@app/shopping-cart/models/shopping-cart-i
     DropdownTriggerService
   ]
 })
-export class NavigationDropdownComponent {
+export class NavigationDropdownComponent implements OnInit, OnDestroy {
 
   private isDropdownOpen: boolean;
-  private subscriptions = [];
+  private subscriptions: Subscription[];
   private iconClass: string;
+  shoppingCart: ShoppingCartInterface;
 
   constructor(
-    private service: DropdownTriggerService,
+    private dropdownService: DropdownTriggerService,
     private shoppingCartService: ShoppingCartService,
     private el: ElementRef
-  ) {
+  ) { }
 
-    this.subscriptions.push(service.onToggle().subscribe((isOpen: boolean) => {
+  ngOnInit() {
+    this.shoppingCart = this.shoppingCartService.getShoppingCart();
+    this.updateIcon(this.shoppingCart.hasItems());
+    this.registerListeners();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
+  private registerListeners() {
+    this.subscriptions = this.subscriptions == undefined ? [] : this.subscriptions;
+
+    this.subscriptions.push(this.dropdownService.onToggle().subscribe((isOpen: boolean) => {
       this.isDropdownOpen = isOpen;
     }));
 
-    this.subscriptions.push(shoppingCartService.onChange((shoppingCart: ShoppingCartInterface) => {
+    this.subscriptions.push(this.shoppingCartService.onChange((shoppingCart) => {
       this.onShoppingCartUpdate(shoppingCart);
     }));
-
-    this.shoppingCartService.add({ id: '1', amount: 0, name: 'test', price: 10 })
-
   }
 
+  private onShoppingCartUpdate(shoppingCart: ShoppingCartInterface) {
+    this.shoppingCart = shoppingCart;
+    this.updateIcon(shoppingCart.hasItems());
+  }
+
+  private updateIcon(cartHasItems: boolean) {
+    this.iconClass = cartHasItems ? 'has-badge is-solid' : 'is-solid'
+  }
 
   onOutSideClick(eventTarget: EventTarget) {
     if (this.el.nativeElement.contains(eventTarget)) {
       return;
     }
 
-    this.service.toggle();
-  }
-
-  onShoppingCartUpdate(shoppingCart: ShoppingCartInterface) {
-    this.updateIcon(shoppingCart.hasItems());
-  }
-
-  updateIcon(cartHasItems: boolean) {
-    this.iconClass = cartHasItems ? 'has-badge is-solid' : 'is-solid'
+    this.dropdownService.toggle();
   }
 
   getIconClass() {
     return this.iconClass;
+  }
+
+  getShoppingCartItems() {
+    return this.shoppingCart.getCartItems();
+  }
+
+  clearShoppingCart() {
+    this.shoppingCartService.clear();
   }
 
 }

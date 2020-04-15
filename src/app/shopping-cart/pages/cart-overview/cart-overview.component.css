@@ -1,0 +1,8 @@
+.page-content{
+    max-width: 100%;
+}
+
+.pos-right {
+    position: absolute;
+    right: 0px;
+}

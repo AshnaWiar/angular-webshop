@@ -3,7 +3,24 @@
     <clr-icon shape="caret down"></clr-icon>
 </button>
 <div class='dropdown-menu' *IfDropdownIsOpen (outSideClick)="onOutSideClick($event)">
-    <a href="..." class="dropdown-item">About</a>
-    <a href="..." class="dropdown-item">Preferences</a>
-    <a href="..." class="dropdown-item">Log out</a>
+
+    <p class="menu-header total-info">
+        <span class="badge badge-info medium-size" [class]="shoppingCart.hasItems() ? null : 'not-visible'">{{shoppingCart.getCartItems().length}}</span>
+        <span class='total-price'>{{shoppingCart.getTotalPrice() | currency}}</span>
+    </p>
+
+    <div class="dropdown-items">
+        <dropdown-item *ngFor=" let cartItem of getShoppingCartItems()" [shoppingCartItem]='cartItem'>
+        </dropdown-item>
+    </div>
+
+    <div class="footer">
+
+        <a [class]="!shoppingCart.hasItems() ? 'disabled': null" class="btn btn-primary btn-checkout" routerLink='/checkout/'>
+            Check out
+        </a>
+
+        <button *ngIf="shoppingCart.hasItems()" class="btn" (click)='clearShoppingCart() '>Clear cart</button>
+    </div>
+
 </div>

@@ -1,0 +1,123 @@
+<div class='page-content clr-row clr-justify-content-center'>
+    <div class='clr-col-5'>
+        <form [formGroup]='getFormGroup()' clrLayout='vertical' clrForm>
+            <div class="page-section" formGroupName="customerInformation">
+
+                <div class="flex-inline">
+                    <h2>Customer Information</h2>
+                    <p>Already registered? <a href="#">Log in</a></p>
+                </div>
+                <clr-input-container>
+                    <label>Email Addres</label>
+                    <input type="text" name="example" placeholder="Email address" formControlName="email" clrInput
+                        required />
+                </clr-input-container>
+
+                <clr-toggle-container>
+                    <clr-toggle-wrapper>
+                        <input type="checkbox" clrToggle value="option1" name="options" checked required />
+                        <label>Subscribe to our newsletters</label>
+                    </clr-toggle-wrapper>
+                </clr-toggle-container>
+
+                <div class="clr-row">
+
+                    <clr-input-container class="clr-col-6">
+                        <label>First Name</label>
+                        <input type="text" name="example" placeholder="First Name" formControlName="firstName" clrInput
+                            required />
+                    </clr-input-container>
+
+                    <clr-input-container class="clr-col-6">
+                        <label>Last Name</label>
+                        <input type="text" name="example" placeholder="Last Name" formControlName="lastName" clrInput
+                            required />
+                    </clr-input-container>
+
+                </div>
+            </div>
+
+            <div class="page-section" formGroupName="addressInformation">
+                <h2>Shipping Information</h2>
+
+                <clr-input-container>
+                    <label>Address</label>
+                    <input type="text" name="example" placeholder="Address" formControlName="address" clrInput
+                        required />
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>City</label>
+                    <input type="text" name="example" placeholder="City" formControlName="city" clrInput required />
+                </clr-input-container>
+
+                <div class="clr-row">
+
+                    <clr-select-container class="clr-col-6">
+                        <label>Country</label>
+                        <select clrSelect name="options" formControlName="country">
+                            <option value="one">One</option>
+                            <option value="two">Two</option>
+                            <option value="three">Three</option>
+                        </select>
+                    </clr-select-container>
+
+                    <clr-input-container class="clr-col-6">
+                        <label>Postal code</label>
+                        <input type="text" name="example" placeholder="Postal code" formControlName="postal" clrInput
+                            required />
+                    </clr-input-container>
+
+                </div>
+
+
+
+                <clr-input-container>
+                    <label>Phone (optional)</label>
+                    <input type="text" name="example" placeholder="Phone" formControlName="phone" clrInput required />
+                </clr-input-container>
+
+            </div>
+
+            <div class="flex-inline">
+                <a class="btn btn-link flex-align-center" routerLink="/checkout/cart">
+                    <clr-icon shape="caret" style="transform: rotate(270deg);"></clr-icon>
+                    Back to cart
+                </a>
+                <button type="submit" class="btn btn-primary">Continue to Payment method</button>
+            </div>
+
+        </form>
+    </div>
+    <div class='clr-col-3'>
+        <div class="page-section">
+            <div class="flex-inline">
+                <h2>Shopping cart summary</h2>
+            </div>
+            <div class="cart-item-wrapper">
+
+                <div class="cart-item" *ngFor='let cartItem of shoppingCart.getCartItems()'>
+
+                    <figure>
+                        <img src="https://via.placeholder.com/75" alt="">
+                    </figure>
+                    <div class="item-info">
+                        <h1>{{cartItem.name}}</h1>
+                        <p>{{cartItem.description}}<br>
+                            <span class="sub-info">Qty: {{cartItem.amount}}</span>
+                        </p>
+                    </div>
+                    <p>{{cartItem.price * cartItem.amount | currency }}</p>
+
+                </div>
+            </div>
+            <div class="cart-total">
+                <p>Subtotal: <span class="pos-right">{{shoppingCart.getTotalPrice() | currency}}</span></p>
+                <p>Shipping Cost: <span class="pos-right">{{ shippingCost | currency}}</span></p>
+                <hr>
+                <p>Total:<span class="pos-right">{{shoppingCart.getTotalPrice() + shippingCost | currency}}</span></p>
+            </div>
+
+        </div>
+    </div>
+</div>

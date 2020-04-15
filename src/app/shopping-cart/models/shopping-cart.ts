@@ -23,9 +23,7 @@ export class ShoppingCart implements ShoppingCartInterface {
             // break the reference from the parameter.
             const cartItem = Object.assign({}, item);
 
-            this.shoppingCart.push(cartItem);
-            console.log('added item', this.shoppingCart);
-            
+            this.shoppingCart.push(cartItem);            
             return;
         }
 
@@ -81,6 +79,10 @@ export class ShoppingCart implements ShoppingCartInterface {
         this.shoppingCart.splice(indexOfCartItem, 1);
     }
     
+    getTotalPrice(){
+        return this.getCartItems().reduce( (previousAmount, currentItem) => previousAmount + (currentItem.price * currentItem.amount), 0);
+    }
+
     isEmpty(): boolean {
         return this.shoppingCart.length === 0;
     }
