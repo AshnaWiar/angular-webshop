@@ -13,7 +13,7 @@ export class ShoppingCartService {
   private shoppingCartEventEmitter: EventEmitter<ShoppingCartInterface>;
 
   constructor() {
-    this.localstorageKey = environment.localstorageShoppingCartKey;
+    this.localstorageKey = environment.localstorageKeys.shoppingCart;
     this.shoppingCartEventEmitter = new EventEmitter();
   }
 
@@ -33,7 +33,11 @@ export class ShoppingCartService {
     return this.shoppingCartEventEmitter.subscribe(callback);
   }
 
-  private getShoppingCart(): ShoppingCartInterface {
+  clear() {
+    this.storeShoppingCart(new ShoppingCart());
+  }
+
+  getShoppingCart(): ShoppingCartInterface {
     let shoppingCartItems = this.getShoppingCartItemsFromLocalStorage()
 
     if (shoppingCartItems === null) {

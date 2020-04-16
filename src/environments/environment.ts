@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  localStorageShoppingCartKey: 'SHOPPING_CART'
-};
+  localstorageKeys: {
+    shoppingCart: 'SHOPPING_CART'
+  }};
 
 /*
  * For easier debugging in development mode, you can import the following file

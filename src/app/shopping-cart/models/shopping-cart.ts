@@ -19,13 +19,11 @@ export class ShoppingCart implements ShoppingCartInterface {
      */
     add(item: ShoppingCartItemInterface): void {
 
-        if (!this.isItemAlreadyAdded(item)) {
-
-
+        if (this.isItemAlreadyAdded(item)) {
             // break the reference from the parameter.
             const cartItem = Object.assign({}, item);
 
-            this.shoppingCart.push(cartItem);
+            this.shoppingCart.push(cartItem);            
             return;
         }
 
@@ -38,11 +36,11 @@ export class ShoppingCart implements ShoppingCartInterface {
     }
 
     private isItemAlreadyAdded(item: ShoppingCartItemInterface) {
-        return typeof this.getItemFromCart(item) !== "undefined";
+        return typeof this.getItemFromCart(item) !== undefined;
     }
 
     private getItemFromCart(item: ShoppingCartItemInterface) {
-        return this.shoppingCart.find(cartItem => cartItem.id = item.id);
+        return this.shoppingCart.find(cartItem => cartItem.id == item.id);
     }
 
     /**
@@ -81,6 +79,10 @@ export class ShoppingCart implements ShoppingCartInterface {
         this.shoppingCart.splice(indexOfCartItem, 1);
     }
     
+    getTotalPrice(){
+        return this.getCartItems().reduce( (previousAmount, currentItem) => previousAmount + (currentItem.price * currentItem.amount), 0);
+    }
+
     isEmpty(): boolean {
         return this.shoppingCart.length === 0;
     }

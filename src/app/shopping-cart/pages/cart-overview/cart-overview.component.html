@@ -1,0 +1,64 @@
+<div class="page-content clr-row clr-justify-content-center">
+
+    <div class="clr-col-8">
+
+        <clr-datagrid [(clrDgSelected)]="selected" (clrDgSelectedChange)="onSelectionChange($event)">
+            <clr-dg-placeholder>Cart Empty</clr-dg-placeholder>
+            <clr-dg-action-bar>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-secondary" (click)="onRemove()"
+                        [disabled]="selected.length == 0">
+                        <clr-icon shape="close"></clr-icon> Delete
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()"
+                        *ngIf="selected.length == 1">
+                        <clr-icon shape="pencil"></clr-icon> Edit
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary" (click)="onSave()"
+                        *ngIf="isEditMode && selected.length == 1">
+                        <clr-icon shape="check"></clr-icon> Save
+                    </button>
+                </div>
+                <div class="btn-group pos-right">
+                    <a type="button" class="btn btn-sm btn-primary" routerLink="/checkout/billing">
+                        Continue <clr-icon shape="step-forward-2"></clr-icon>
+                    </a>
+                </div>
+            </clr-dg-action-bar>
+            <clr-dg-column>Photo</clr-dg-column>
+            <clr-dg-column>Name</clr-dg-column>
+            <clr-dg-column>Description</clr-dg-column>
+            <clr-dg-column>Amount</clr-dg-column>
+            <clr-dg-column>Total price</clr-dg-column>
+
+            <clr-dg-row *clrDgItems="let cartItem of shoppingCart.getCartItems()" [clrDgItem]="cartItem" class="">
+                <clr-dg-cell><img src="https://via.placeholder.com/75" alt=""></clr-dg-cell>
+                <clr-dg-cell>{{cartItem.name}}</clr-dg-cell>
+                <clr-dg-cell>{{cartItem.description}}</clr-dg-cell>
+                <clr-dg-cell>
+
+                    <clr-range-container [clrRangeHasProgress]="true" [style.margin]='0'
+                        *ngIf="isEditMode && selected.length == 1 && isSelected(cartItem); else elseBlock;">
+                        <input type="range" clrRange [(ngModel)]="updateAmount" name="three" [min]=1 />
+                        <clr-control-helper>{{updateAmount}}</clr-control-helper>
+                    </clr-range-container>
+
+                    <ng-template #elseBlock>
+                        {{cartItem.amount}}
+                    </ng-template>
+
+                </clr-dg-cell>
+
+                <clr-dg-cell>{{cartItem.price * cartItem.amount | currency}}</clr-dg-cell>
+            </clr-dg-row>
+
+            <clr-dg-footer>
+                Total: {{ shoppingCart.getTotalPrice() | currency }} | {{shoppingCart.getCartItems().length}}
+                Items
+            </clr-dg-footer>
+        </clr-datagrid>
+
+
+    </div>
+
+</div>

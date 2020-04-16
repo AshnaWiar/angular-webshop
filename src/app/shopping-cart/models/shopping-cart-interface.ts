@@ -31,4 +31,9 @@ export interface ShoppingCartInterface {
      */
     hasItems(): boolean;
 
+    /**
+     * Return the total amount of price to.
+     */
+    getTotalPrice(): number
+
 }

@@ -12,7 +12,7 @@ export class OutSideClickDirective {
 
   @HostListener('document:click', ['$event.target'])
   onDocumentClick(target: EventTarget) {
-    
+
     if(target === this.el.nativeElement || this.el.nativeElement.contains(target)){
       return
     }
