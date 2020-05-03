@@ -1,0 +1,41 @@
+<div class="page-content clr-row clr-justify-content-center">
+
+    <div class="clr-col-2" *ngFor="let product of products">
+        <a class="card " [class]="product.stock >= 1 ? 'clickable': null" (click)="openModal($event, product)">
+            <div class="card-img">
+                <img [src]="product.imageURL">
+            </div>
+            <div class="card-block">
+                <h1 class="no-margin">{{product.name}}</h1>
+                <p class="card-text">
+                    {{product.description}}
+                </p>
+            </div>
+            <div class="card-footer">
+                <span class="price">{{product.price  | currency}}</span>
+                <span *ngIf="product.stock <= 0" class="label label-danger">Out of stock</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="showModal" *ngIf="selectedProduct !== undefined">
+    <h3 class="modal-title">{{selectedProduct.name}}</h3>
+    <div class="modal-body">
+
+        <p>Select the amount you want to order:</p>
+
+        <form>
+            <clr-range-container [clrRangeHasProgress]="true" >
+                <label>Order amount</label>
+                <input type="range" clrRange [(ngModel)]="selectedProduct.amount" [max]="selectedProduct.stock" name="range" />
+                <clr-control-helper>{{selectedProduct.amount}}</clr-control-helper>
+            </clr-range-container>
+        </form>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="showModal = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addToBasket()">Add to Basket</button>
+    </div>
+</clr-modal>

@@ -1,0 +1,15 @@
+.card {
+    max-height: 490px;
+}
+
+.modal-body {
+    overflow: hidden;
+}
+
+.card-footer span.label{
+    float: right;
+}
+
+a.card {
+    text-decoration: none;
+}

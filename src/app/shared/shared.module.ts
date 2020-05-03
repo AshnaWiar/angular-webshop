@@ -1,21 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClrIconModule, ClrFormsModule, ClrInputModule,ClrDropdownModule, ClrTabsModule, ClrDatagridModule} from '@clr/angular';
+import { ClrIconModule, ClrFormsModule, ClrInputModule,ClrDropdownModule, ClrTabsModule, ClrDatagridModule, ClrModalModule} from '@clr/angular';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    ClrIconModule,
-    ClrDropdownModule,
-    ClrFormsModule,
-    ClrInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ClrTabsModule,
-    ClrDatagridModule
-  ],
+  imports: [],
   exports: [
     ClrIconModule,
     ClrDropdownModule,
@@ -24,7 +15,8 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     ClrTabsModule,
-    ClrDatagridModule
+    ClrDatagridModule,
+    ClrModalModule
   ]
 })
 export class SharedModule { }

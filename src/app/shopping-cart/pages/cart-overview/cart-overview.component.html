@@ -32,7 +32,7 @@
             <clr-dg-column>Total price</clr-dg-column>
 
             <clr-dg-row *clrDgItems="let cartItem of shoppingCart.getCartItems()" [clrDgItem]="cartItem" class="">
-                <clr-dg-cell><img src="https://via.placeholder.com/75" alt=""></clr-dg-cell>
+                <clr-dg-cell><img [src]="cartItem.imageURL" width="75" height="75" alt=""></clr-dg-cell>
                 <clr-dg-cell>{{cartItem.name}}</clr-dg-cell>
                 <clr-dg-cell>{{cartItem.description}}</clr-dg-cell>
                 <clr-dg-cell>

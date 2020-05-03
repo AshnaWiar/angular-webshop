@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  endpoints: {
+    API: 'http://localhost:8080/api/'
+  },
   localstorageKeys: {
     shoppingCart: 'SHOPPING_CART'
   }};

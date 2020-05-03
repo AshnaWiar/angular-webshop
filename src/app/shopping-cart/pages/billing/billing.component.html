@@ -99,7 +99,7 @@
                 <div class="cart-item" *ngFor='let cartItem of shoppingCart.getCartItems()'>
 
                     <figure>
-                        <img src="https://via.placeholder.com/75" alt="">
+                        <img [src]="cartItem.imageURL" width="75" height="75" alt="">
                     </figure>
                     <div class="item-info">
                         <h1>{{cartItem.name}}</h1>

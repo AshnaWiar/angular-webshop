@@ -3,5 +3,6 @@ export interface ShoppingCartItemInterface {
     name: string,
     description: string,
     price: number,
-    amount: number
+    amount: number,
+    imageURL: string,
 }

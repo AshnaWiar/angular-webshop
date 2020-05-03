@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { WebshopModule } from './webshop/webshop.module';
 
 @NgModule({
   declarations: [
@@ -15,9 +18,9 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     ShoppingCartModule,
-    BrowserAnimationsModule 
+    WebshopModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
